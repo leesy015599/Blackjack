@@ -12,6 +12,7 @@ namespace Blackjack
 
         public Card DrawCardFromDeck(Deck deck)
         {
+			Thread.Sleep(500);
             Card drawnCard = deck.DrawCard();
             Hand.AddCard(drawnCard);
             return drawnCard;

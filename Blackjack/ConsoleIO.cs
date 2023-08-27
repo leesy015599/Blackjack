@@ -68,18 +68,17 @@ namespace Blackjack
 			Console.Write($"{suit}");
 		}
 
-		public static void RevealCard(Dealer dealer)
+		public static void RevealHiddenCard(Dealer dealer)
 		{
+			Thread.Sleep(500);
 			int cardCount = dealer.Hand.CountCard();
 
-			int col;
+			int col = 0;
 			int row = 4;
-			Card card;
-
-			for (int i = 2; i <= cardCount; i++)
+			int i = 0;
+			foreach (Card card in dealer.Hand.Cards)
 			{
-				col = (i - 1) * 6 + 3;
-				card = dealer.Hand.Cards[i - 1];
+				col = i++ * 6 + 3;
 				Console.SetCursorPosition(col + 2, row + 1);
 				Console.Write($"{rankSymbol[(int)card.Rank]}");
 				if ((int)card.Rank == 10)
@@ -87,6 +86,42 @@ namespace Blackjack
 				Console.SetCursorPosition(col + 3, row + 2);
 				Console.Write($"{suitSymbol[(int)card.Suit]}");
 			}
+
+			Console.SetCursorPosition(16, 2);
+			Console.Write("   ");
+			Console.SetCursorPosition(16, 2);
+			Console.Write(dealer.Hand.GetTotalValue());
+		}
+
+		public static void WriteScore(Player player)
+		{
+			bool isDealer = false;
+			if (player.GetType() == typeof(Dealer))
+				isDealer = true;
+			int row = isDealer ? 2 : 10;
+			Console.SetCursorPosition(16, row);
+			if (isDealer)
+				Console.Write("???");
+			else
+				Console.Write(player.Hand.GetTotalValue());
+		}
+
+		public static void Win()
+		{
+			Console.SetCursorPosition(17, 9);
+			Console.Write(" Y O U   W I N ! ");
+		}
+
+		public static void Lose()
+		{
+			Console.SetCursorPosition(17, 9);
+			Console.Write(" Y O U   L O S E ");
+		}
+
+		public static void Push()
+		{
+			Console.SetCursorPosition(17, 9);
+			Console.Write("  P U S H (tie)  ");
 		}
 	}
 }

@@ -27,11 +27,6 @@ namespace Blackjack
                 return 11;
             }
         }
-
-        //public override string ToString()
-        //{
-        //    return $"{Rank} of {Suit}";
-        //}
     }
 }
 

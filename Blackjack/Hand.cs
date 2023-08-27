@@ -5,7 +5,13 @@ namespace Blackjack
     {
         private List<Card> cards;
 
-        public List<Card> Cards { get; }
+        public List<Card> Cards
+        {
+            get
+            {
+                return cards;
+            }
+        }
 
         public Hand()
         {
